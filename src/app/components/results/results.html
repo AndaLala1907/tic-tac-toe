@@ -1,0 +1,17 @@
+@if (vm$ | async; as vm) {
+  @if (vm.players) {
+    <section class="card">
+      <h2>Tournament results</h2>
+      <p class="verdict" aria-live="polite">
+        @if (vm.winnerPlayer; as w) {
+          🏆 {{ w.name }} wins the tournament!
+        } @else {
+          🤝 The tournament ended in a tie.
+        }
+      </p>
+      <p class="meta">{{ vm.totalGames }} {{ vm.totalGames === 1 ? 'game' : 'games' }} played · {{ vm.scores.draws }} {{ vm.scores.draws === 1 ? 'draw' : 'draws' }}</p>
+      <app-scoreboard [players]="vm.players" [scores]="vm.scores" />
+      <button type="button" class="primary" (click)="store.newTournament()">Play again</button>
+    </section>
+  }
+}

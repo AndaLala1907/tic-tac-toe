@@ -1,0 +1,33 @@
+@use 'variables' as *;
+
+// Global element styles and layout helpers.
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: $font-family;
+  background: var(--bg);
+  color: var(--text);
+}
+
+h1 {
+  text-align: center;
+}
+
+// Centered page column.
+.container {
+  max-width: $container-width;
+  margin: 0 auto;
+  padding: $space-lg $space-md 3rem;
+}
+
+// White panel that holds each screen.
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: $radius-lg;
+  padding: 1.25rem;
+}

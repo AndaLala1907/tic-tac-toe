@@ -1,0 +1,105 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+
+// ---- Layout ----
+
+.card {
+  display: grid;
+  gap: $space-md;
+}
+
+h2 {
+  margin: 0;
+}
+
+// One labelled form row (also used on <fieldset>).
+.field {
+  display: grid;
+  gap: 0.35rem;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+label,
+legend {
+  padding: 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+// ---- Text inputs ----
+
+input[type='text'] {
+  padding: 0.65rem 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: $radius-sm;
+  background: var(--surface);
+  color: inherit;
+  font-size: $font-size-base;
+
+  &:focus-visible {
+    @include focus-ring;
+  }
+
+  // Added by the template when validation fails.
+  &.invalid {
+    border-color: var(--danger);
+  }
+}
+
+// ---- Messages ----
+
+.error {
+  color: var(--danger);
+}
+
+.hint {
+  color: var(--muted);
+}
+
+// ---- Radio "pill" choices (X/O and number of games) ----
+
+.choices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-sm;
+}
+
+.choice {
+  @include tile;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 5.5rem;
+  padding: 0.55rem $space-md;
+  font-weight: 600;
+  cursor: pointer;
+
+  // The real radio is invisible but covers the whole pill, so it stays clickable and focusable.
+  input {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  &.selected {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+  }
+
+  &:has(input:focus-visible) {
+    @include focus-ring;
+  }
+}
+
+// The big X / O letter inside a choice.
+.mark {
+  font-size: $font-size-lg;
+  font-weight: 800;
+
+  @include mark-colors;
+}

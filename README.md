@@ -1,59 +1,40 @@
-# TicTacToe
+# Tic Tac Toe – Tournament
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.42.
+Angular 20 app: two players, multi-round tournament (1, 3 or 5 games) with score tracking.
 
-## Development server
-
-To start a local development server, run:
+## Run
 
 ```bash
-ng serve
+npm install
+npm start          # http://localhost:4200
+npm test           # unit tests (Karma + Jasmine)
+npm run build
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Architecture
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
+```
+src/app
+├── models/       types (Player, TournamentState, ...)
+├── core/         pure game logic (win/draw detection) – no Angular, trivially testable
+├── store/        TournamentStore: RxJS BehaviorSubject state + selectors + actions
+└── components/
+    ├── setup/       Reactive Form (FormBuilder) – names, X/O, number of games
+    ├── game/        smart component: combines store selectors into one view-model stream
+    ├── board/       dumb component (input/output)
+    ├── scoreboard/  dumb component
+    └── results/     final standings + "Play again"
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+- **State**: one immutable state object in a `BehaviorSubject`; components read it through
+  `distinctUntilChanged` selectors and the `async` pipe, and change it only through store actions.
+- **Forms**: `FormBuilder.nonNullable`, `Validators.required/minLength/maxLength`, a custom
+  `notBlank` validator and a group-level `distinctNames` validator (case-insensitive).
+- All components are standalone with `OnPush` change detection.
 
-```bash
-ng generate --help
-```
+## Rules implemented
 
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- Player 2 automatically gets the symbol Player 1 did not pick.
+- All N games are played; the starting player alternates every game (Player 1 starts game 1).
+- Wins and draws are tracked separately; the header shows "Game 3 of 5".
+- Overall winner = most wins; equal wins is reported as a tie.

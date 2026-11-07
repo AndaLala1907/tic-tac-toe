@@ -1,0 +1,57 @@
+<form class="card" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+  <h2>New tournament</h2>
+
+  <div class="field">
+    <label for="p1">Player 1 name</label>
+    <input id="p1" type="text" formControlName="player1Name" autocomplete="off" [class.invalid]="showError('player1Name') || showSameNames()" />
+    @if (showError('player1Name')) {
+      <small class="error">
+        @if (form.controls.player1Name.hasError('required') || form.controls.player1Name.hasError('blank')) { Name is required. }
+        @else if (form.controls.player1Name.hasError('minlength')) { At least 2 characters. }
+        @else { At most 20 characters. }
+      </small>
+    }
+  </div>
+
+  <div class="field">
+    <label for="p2">Player 2 name</label>
+    <input id="p2" type="text" formControlName="player2Name" autocomplete="off" [class.invalid]="showError('player2Name') || showSameNames()" />
+    @if (showError('player2Name')) {
+      <small class="error">
+        @if (form.controls.player2Name.hasError('required') || form.controls.player2Name.hasError('blank')) { Name is required. }
+        @else if (form.controls.player2Name.hasError('minlength')) { At least 2 characters. }
+        @else { At most 20 characters. }
+      </small>
+    }
+  </div>
+  @if (showSameNames()) {
+    <small class="error">Players must have different names.</small>
+  }
+
+  <fieldset class="field">
+    <legend>Player 1 plays as</legend>
+    <div class="choices">
+      @for (m of marks; track m) {
+        <label class="choice" [class.selected]="p1Symbol === m">
+          <input type="radio" formControlName="player1Symbol" [value]="m" />
+          <span class="mark" [class.x]="m === 'X'" [class.o]="m === 'O'">{{ m }}</span>
+        </label>
+      }
+    </div>
+    <small class="hint">Player 2 will play as <strong>{{ p2Symbol }}</strong>.</small>
+  </fieldset>
+
+  <fieldset class="field">
+    <legend>Number of games</legend>
+    <div class="choices">
+      @for (n of gameCounts; track n) {
+        <label class="choice" [class.selected]="form.controls.totalGames.value === n">
+          <input type="radio" formControlName="totalGames" [value]="n" />
+          <span>Best of {{ n }}</span>
+        </label>
+      }
+    </div>
+  </fieldset>
+
+  <button type="submit" class="primary" [disabled]="form.invalid && form.touched">Start tournament</button>
+</form>

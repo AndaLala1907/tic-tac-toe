@@ -1,0 +1,16 @@
+<div class="scoreboard" aria-label="Scoreboard">
+  @for (p of players(); track $index) {
+    <div class="score" [class.active]="activePlayer() === $index">
+      <span class="name"><span class="mark" [class.x]="p.symbol === 'X'" [class.o]="p.symbol === 'O'">{{ p.symbol }}</span> {{ p.name }}</span>
+      <strong class="value">{{ scores().wins[$index] }}</strong>
+      <span class="label">wins</span>
+    </div>
+    @if ($first) {
+      <div class="score draws">
+        <span class="name">Draws</span>
+        <strong class="value">{{ scores().draws }}</strong>
+        <span class="label">&nbsp;</span>
+      </div>
+    }
+  }
+</div>

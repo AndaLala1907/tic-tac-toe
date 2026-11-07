@@ -1,0 +1,29 @@
+@use 'variables';
+
+// ============================================================
+// Reusable snippets. Import in a component with:
+//   @use '../../../styles/mixins' as *;
+// ============================================================
+
+// Keyboard focus outline used on every interactive element.
+@mixin focus-ring {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+// Colours an element red for X or blue for O when it has the class .x or .o.
+@mixin mark-colors {
+  &.x {
+    color: var(--x);
+  }
+
+  &.o {
+    color: var(--o);
+  }
+}
+
+// A plain bordered tile (used by score boxes and choice buttons).
+@mixin tile {
+  border: 2px solid var(--border);
+  border-radius: variables.$radius-md;
+}

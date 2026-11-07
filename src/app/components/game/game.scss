@@ -1,0 +1,30 @@
+@use '../../../styles/variables' as *;
+
+.card {
+  display: grid;
+  gap: $space-md;
+}
+
+// "GAME 2 OF 3"
+.progress {
+  margin: 0;
+  color: var(--muted);
+  font-size: $font-size-sm;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+// Whose turn / who won, plus the "Next game" button right below it.
+.status-area {
+  display: grid;
+  gap: $space-sm;
+  justify-items: center;
+}
+
+.status {
+  margin: 0;
+  min-height: 1.5rem; // keeps the layout still when the text changes
+  text-align: center;
+}

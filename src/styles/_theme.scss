@@ -1,0 +1,45 @@
+// ============================================================
+// Colours, as CSS custom properties so they can switch at runtime.
+// Change the palette here; components only use var(--name).
+// ============================================================
+
+:root {
+  // Surfaces and text
+  --bg: #f4f6fb;
+  --surface: #ffffff;
+  --text: #1c2233;
+  --muted: #667085;
+  --border: #d5dae5;
+
+  // Brand / interaction
+  --accent: #4f46e5;
+  --accent-soft: #eef0ff;
+
+  // Feedback
+  --win: #d7f5e3;
+  --danger: #c62828;
+
+  // Player marks
+  --x: #e11d48;
+  --o: #0284c7;
+}
+
+// Dark theme follows the operating system setting.
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #12151f;
+    --surface: #1b2030;
+    --text: #e8ebf4;
+    --muted: #9aa3b8;
+    --border: #333b52;
+
+    --accent: #818cf8;
+    --accent-soft: #262c4a;
+
+    --win: #1d4a35;
+    --danger: #ef5350;
+
+    --x: #fb7185;
+    --o: #38bdf8;
+  }
+}

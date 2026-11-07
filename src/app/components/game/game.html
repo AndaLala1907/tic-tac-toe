@@ -1,0 +1,30 @@
+@if (vm$ | async; as vm) {
+  @if (vm.players) {
+    <section class="card">
+      <p class="progress">Game {{ vm.currentGame }} of {{ vm.totalGames }}</p>
+
+      <app-scoreboard [players]="vm.players" [scores]="vm.scores" [activePlayer]="vm.result ? null : vm.turn" />
+
+      <!-- Status and the next-step button sit above the board so they are always visible. -->
+      <div class="status-area">
+        <p class="status" aria-live="polite">
+          @if (!vm.result) {
+            <strong>{{ vm.players[vm.turn].name }}</strong> to move ({{ vm.players[vm.turn].symbol }})
+          } @else if (vm.winnerName) {
+            🎉 {{ vm.winnerName }} wins this game!
+          } @else {
+            It is a draw!
+          }
+        </p>
+
+        @if (vm.result) {
+          <button type="button" class="primary" (click)="store.nextGame()">
+            {{ vm.isLastGame ? 'See results' : 'Next game' }}
+          </button>
+        }
+      </div>
+
+      <app-board [board]="vm.board" [winningLine]="vm.result?.line ?? null" [disabled]="!!vm.result" (cellClick)="store.play($event)" />
+    </section>
+  }
+}

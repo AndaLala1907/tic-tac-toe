@@ -1,0 +1,44 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+
+// 3x3 grid, centred, never wider than $board-max-width.
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $space-sm;
+  width: min(100%, $board-max-width);
+  margin-inline: auto;
+}
+
+// One square.
+.cell {
+  aspect-ratio: 1;
+  border: 2px solid var(--border);
+  border-radius: $radius-md;
+  background: var(--surface);
+  color: inherit;
+  font-size: clamp(2rem, 9vw, 3.2rem); // scales with the screen width
+  font-weight: 800;
+  cursor: pointer;
+
+  &:hover:not(:disabled) {
+    background: var(--accent-soft);
+  }
+
+  &:disabled {
+    cursor: default;
+  }
+
+  &:focus-visible {
+    @include focus-ring;
+  }
+
+  // Colour of the X / O placed in the cell.
+  @include mark-colors;
+
+  // Part of the winning line.
+  &.win {
+    border-color: var(--accent);
+    background: var(--win);
+  }
+}

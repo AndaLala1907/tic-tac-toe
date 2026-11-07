@@ -1,0 +1,26 @@
+// ============================================================
+// Design tokens that never change between light/dark themes.
+// Edit sizes, spacing and radii here.
+// ============================================================
+
+// Spacing scale
+$space-xs: 0.25rem;
+$space-sm: 0.5rem;
+$space-md: 1rem;
+$space-lg: 1.5rem;
+
+// Border radius
+$radius-sm: 8px;
+$radius-md: 10px;
+$radius-lg: 14px;
+
+// Layout
+$container-width: 30rem;
+$board-max-width: 22rem;
+
+// Typography
+$font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+$font-size-sm: 0.85rem;
+$font-size-base: 1rem;
+$font-size-lg: 1.4rem;
+$font-size-score: 1.8rem;

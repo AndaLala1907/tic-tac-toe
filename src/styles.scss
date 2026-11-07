@@ -1,1 +1,4 @@
-/* You can add global styles to this file, and also import other style files */
+// Global stylesheet: only imports. Each partial lives in src/styles/.
+@use './styles/theme';
+@use './styles/base';
+@use './styles/buttons';

@@ -1,0 +1,24 @@
+@use '../../../styles/variables' as *;
+
+.card {
+  display: grid;
+  gap: $space-md;
+  text-align: center;
+}
+
+h2 {
+  margin: 0;
+}
+
+// "Ana wins the tournament!"
+.verdict {
+  margin: 0;
+  font-size: $font-size-lg;
+  font-weight: 800;
+}
+
+// "3 games played · 1 draw"
+.meta {
+  margin: 0;
+  color: var(--muted);
+}
